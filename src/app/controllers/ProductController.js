@@ -8,6 +8,7 @@ class ProductController {
     const schema = Yup.object({
       name: Yup.string().required(),
       price: Yup.number().required(),
+      description: Yup.string().max(255),
       category_id: Yup.number().required(),
       offer: Yup.boolean(),
     });
@@ -27,11 +28,12 @@ class ProductController {
     }
 
     const { filename: path } = request.file;
-    const { name, price, category_id, offer } = request.body;
+    const { name, price, category_id, offer, description } = request.body;
 
     const product = await Product.create({
       name,
       price,
+      description,
       category_id,
       path,
       offer,
@@ -44,6 +46,7 @@ class ProductController {
     const schema = Yup.object({
       name: Yup.string(),
       price: Yup.number(),
+      description: Yup.string().max(255),
       category_id: Yup.number(),
       offer: Yup.boolean(),
     });
@@ -71,17 +74,18 @@ class ProductController {
         .json({ error: 'Make sure your product ID is correct' });
     }
     // Deixa a variavel path(que a opção de colocar arquivo) opcional
-    
+
     if (request.file) {
       path = request.file.filename;
     }
 
-    const { name, price, category_id, offer } = request.body;
+    const { name, price, category_id, offer, description } = request.body;
     // Fazendo edição do produtos
     await Product.update(
       {
         name,
         price,
+        description,
         category_id,
         path,
         offer,

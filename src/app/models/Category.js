@@ -5,8 +5,10 @@ class Category extends Model {
     super.init(
       {
         name: Sequelize.STRING, // => campo de nome da categoria
+        description: Sequelize.STRING,
         path: Sequelize.STRING, // => campo de arquivo
-        url: {  // => campo virtual para espor a url do arquivo para front-end
+        url: {
+          // => campo virtual para espor a url do arquivo para front-end
           type: Sequelize.VIRTUAL,
 
           get() {

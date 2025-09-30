@@ -7,6 +7,7 @@ class CategoryController {
     const schema = Yup.object({
       // válida se e uma "string" e  é obrigatória
       name: Yup.string().required(),
+      description: Yup.string().max(255),
     });
 
     try {
@@ -19,13 +20,16 @@ class CategoryController {
 
     const { admin: isAdmin } = await User.findByPk(request.userId);
 
+    console.log({ isAdmin });
+
     if (!isAdmin) {
       return response.status(401).json({
         message: 'User is not an administrator(Usuario não e administrador)',
       });
     }
+
     const { filename: path } = request.file;
-    const { name } = request.body;
+    const { name, description } = request.body;
 
     // procurando categoria no banco para comparar
 
@@ -38,19 +42,22 @@ class CategoryController {
     if (categoryExists) {
       return response.status(400).json({ error: 'Category already exists' });
     }
+    console.log({ name, description, path });
 
     const { id } = await Category.create({
       name,
+      description,
       path,
     });
 
-    return response.status(201).json({ id, name });
+    return response.status(201).json({ id, name, description });
   }
 
   async update(request, response) {
     const schema = Yup.object({
       // válida se e uma "string" , e sem "requerid()" ele vira opcional
       name: Yup.string(),
+      description: Yup.string().max(255),
     });
 
     try {
@@ -87,7 +94,7 @@ class CategoryController {
     }
 
     // pega o nome ca categoria
-    const { name } = request.body;
+    const { name, description } = request.body;
 
     if (name) {
       const categoryNameExists = await Category.findOne({
@@ -105,6 +112,7 @@ class CategoryController {
     await Category.update(
       {
         name,
+        description,
         path,
       },
       {
