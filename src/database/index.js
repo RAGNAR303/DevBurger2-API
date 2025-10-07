@@ -5,7 +5,9 @@ import User from '../app/models/User';
 import Product from '../app/models/Product';
 import Category from '../app/models/Category';
 
+const MGConnect = process.env.MG_CONNECT;
 const models = [User, Product, Category];
+
 
 class Database {
   constructor() {
@@ -22,9 +24,7 @@ class Database {
       );
   }
   mongo() {
-    this.mongoConnection = mongoose.connect(
-      'mongodb://localhost:27017/devburger',
-    );
+    this.mongoConnection = mongoose.connect(MGConnect);
   }
 }
 

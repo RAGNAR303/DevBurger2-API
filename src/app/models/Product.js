@@ -1,5 +1,7 @@
 import Sequelize, { Model } from 'sequelize';
 
+const baseUrl = process.env.BASE_URL;
+
 class Product extends Model {
   static init(sequelize) {
     super.init(
@@ -14,7 +16,7 @@ class Product extends Model {
 
           get() {
             // cria um campo virtual
-            return `http://localhost:3002/product-file/${this.path}`;
+            return `${baseUrl}/product-file/${this.path}`;
           },
         },
       },

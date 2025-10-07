@@ -1,4 +1,8 @@
+const secret = process.env.AUTH_SECRET;
+const expiresIn = process.env.AUTH_EXPERES_IN;
+
+
 export default {
-  secret: '975359016138b0223ab789505f7dbeca',
-  expiresIn: '5d',
+  secret,
+  expiresIn,
 };

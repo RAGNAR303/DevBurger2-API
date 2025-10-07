@@ -29,7 +29,7 @@ class UserController {
       },
     });
 
-    console.log(userExists);
+
     // se tiver o mesmo usuario ele da return para nao quebra a aplicação
     if (userExists) {
       return response

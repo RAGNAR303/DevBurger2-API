@@ -1,12 +1,10 @@
 import app from './app';
 
-const APP_PORT = 3002;
-const MONGO_PORT = 27017;
+const appPort = process.env.APP_PORT;
+const mongoPort = process.env.MG_PORT;
 
-app.listen(APP_PORT, () =>
-  console.log(`Server running on port ${APP_PORT}...`),
-);
+app.listen(appPort, () => console.log(`Server running on port ${appPort}...`));
 
-app.listen(MONGO_PORT, () =>
-  console.log(`Mongo running on port ${MONGO_PORT}...`),
+app.listen(mongoPort, () =>
+  console.log(`Mongo running on port ${mongoPort}...`),
 );

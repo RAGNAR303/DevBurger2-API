@@ -13,8 +13,6 @@ function authMiddleware(request, response, next) {
   // Separa o "bearer" do token
   const token = authToken.split(' ').at(1);
 
-  console.log(token);
-
   try {
     jwt.verify(token, authConfig.secret, (err, decoded) => {
       if (err) {

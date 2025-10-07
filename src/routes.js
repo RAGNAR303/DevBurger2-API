@@ -7,6 +7,7 @@ import ProductController from './app/controllers/ProductController';
 import authMiddleware from './app/middlewares/auth';
 import CategoryController from './app/controllers/CategoryController';
 import OrderController from './app/controllers/OrderController';
+import CreatePaymentIntentController from './app/controllers/stripe/CreatePaymentIntentController';
 
 const routes = new Router();
 // Criar a rotas para ser acessadas pelo navegador
@@ -29,5 +30,7 @@ routes.put('/categories/:id', upload.single('file'), CategoryController.update);
 routes.post('/orders', OrderController.store); // rota de criação pedidos
 routes.get('/orders', OrderController.index); // rota que faz a listagem dos pedidos
 routes.put('/orders/:id', OrderController.update); // rota de atualização pedidos
+
+routes.post('/create-payment-intent', CreatePaymentIntentController.store);
 
 export default routes;

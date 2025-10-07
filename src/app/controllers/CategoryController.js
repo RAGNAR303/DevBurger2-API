@@ -20,7 +20,7 @@ class CategoryController {
 
     const { admin: isAdmin } = await User.findByPk(request.userId);
 
-    console.log({ isAdmin });
+ 
 
     if (!isAdmin) {
       return response.status(401).json({
@@ -42,7 +42,7 @@ class CategoryController {
     if (categoryExists) {
       return response.status(400).json({ error: 'Category already exists' });
     }
-    console.log({ name, description, path });
+
 
     const { id } = await Category.create({
       name,
