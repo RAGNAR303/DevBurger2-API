@@ -75,6 +75,8 @@ class ProductController {
     }
     // Deixa a variavel path(que a opção de colocar arquivo) opcional
 
+    // deixa opcional o campo de arquivo de imagem
+    let path;
     if (request.file) {
       path = request.file.filename;
     }
